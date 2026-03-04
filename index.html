@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARCADIA — Official Site</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #08090c;
+  --bg2:       #0d0f14;
+  --bg3:       #12151c;
+  --gold:      #c9a84c;
+  --gold-lt:   #e8cc80;
+  --gold-dim:  #6a5428;
+  --red:       #c0392b;
+  --red-lt:    #e74c3c;
+  --silver:    #8a9bb0;
+  --silver-lt: #b8cad8;
+  --white:     #e8edf2;
+  --dim:       #3a4555;
+  --border:    rgba(201,168,76,0.18);
+  --border2:   rgba(255,255,255,0.06);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Noto Sans KR', 'Inter', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  background: rgba(8,9,12,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(201,168,76,0.4);
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--silver);
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: color 0.25s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold-lt); }
+.nav-links a:hover::after { width: 100%; }
+
+.nav-tag {
+  font-size: 0.65rem;
+  color: var(--dim);
+  letter-spacing: 0.2em;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 60%, rgba(192,57,43,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 80% 30%, rgba(201,168,76,0.05) 0%, transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, #0a0b10 50%, #06080d 100%);
+}
+
+/* Geometric lines */
+.hero-geo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.25;
+}
+
+.geo-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+  height: 1px;
+}
+
+.geo-line:nth-child(1) { top: 28%; left: 0; right: 0; opacity: 0.6; }
+.geo-line:nth-child(2) { top: 72%; left: 0; right: 0; opacity: 0.4; }
+
+.geo-v {
+  position: absolute;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--gold-dim), transparent);
+}
+
+.geo-v:nth-child(3) { left: 15%; top: 20%; height: 60%; }
+.geo-v:nth-child(4) { right: 15%; top: 20%; height: 60%; }
+
+/* Diamond decoration */
+.hero-diamond {
+  position: absolute;
+  width: 8px; height: 8px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+  opacity: 0.6;
+}
+.hero-diamond.tl { top: 28%; left: 15%; margin-left: -4px; margin-top: -4px; }
+.hero-diamond.tr { top: 28%; right: 15%; margin-right: -4px; margin-top: -4px; }
+.hero-diamond.bl { top: 72%; left: 15%; margin-left: -4px; margin-top: -4px; }
+.hero-diamond.br { top: 72%; right: 15%; margin-right: -4px; margin-top: -4px; }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.55em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeDown 0.9s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(4rem, 11vw, 8.5rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  color: var(--white);
+  position: relative;
+  opacity: 0;
+  animation: fadeDown 0.9s 0.4s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.hero-title-sub {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: clamp(0.8rem, 2vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.55em;
+  color: var(--gold);
+  margin-top: 12px;
+  opacity: 0;
+  animation: fadeDown 0.9s 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.hero-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 36px auto;
+  opacity: 0;
+  animation: fadeDown 0.9s 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.hero-divider-line {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim));
+}
+
+.hero-divider-line.r { background: linear-gradient(90deg, var(--gold-dim), transparent); }
+
+.hero-divider-diamond {
+  width: 6px; height: 6px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+}
+
+.hero-desc {
+  font-size: 0.88rem;
+  line-height: 2;
+  color: var(--silver);
+  max-width: 520px;
+  margin: 0 auto;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeDown 0.9s 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  animation: fadeDown 0.9s 1.1s forwards, scrollPulse 2.5s 1.5s infinite;
+}
+
+.scroll-icon {
+  width: 22px; height: 34px;
+  border: 1px solid var(--dim);
+  border-radius: 11px;
+  position: relative;
+}
+
+.scroll-icon::after {
+  content: '';
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 3px; height: 6px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scrollDot 2.5s 1.5s infinite;
+}
+
+.scroll-text {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: var(--dim);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── SECTION BASE ─── */
+.section {
+  padding: 120px 60px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+
+.section-number {
+  font-family: 'Cinzel', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--bg3);
+  line-height: 1;
+  -webkit-text-stroke: 1px var(--dim);
+  user-select: none;
+}
+
+.section-title-wrap {}
+
+.section-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.45em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.05em;
+}
+
+.full-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ─── WORLD ─── */
+.world-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+}
+
+.world-panel {
+  background: var(--bg2);
+  padding: 48px 44px;
+  position: relative;
+  overflow: hidden;
+}
+
+.world-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+}
+
+.world-panel.rw::before { background: linear-gradient(180deg, var(--red), transparent); }
+.world-panel.vw::before { background: linear-gradient(180deg, var(--gold), transparent); }
+
+.world-type {
+  font-size: 0.62rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+}
+
+.world-panel.rw .world-type { color: var(--red-lt); }
+.world-panel.vw .world-type { color: var(--gold); }
+
+.world-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+.world-body {
+  font-size: 0.83rem;
+  line-height: 1.9;
+  color: var(--silver);
+  margin-bottom: 32px;
+}
+
+.loc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.loc-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border2);
+  font-size: 0.8rem;
+  align-items: baseline;
+}
+
+.loc-name {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--silver-lt);
+}
+
+.loc-desc { color: var(--silver); line-height: 1.6; }
+
+/* ─── SECTION BANNER ─── */
+.section-banner {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.6;
+  transition: opacity 0.4s;
+  display: block;
+}
+
+.section-banner img.placeholder-hidden {
+  display: none;
+}
+
+.banner-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px dashed var(--border);
+  margin: 0;
+}
+
+.banner-placeholder-icon {
+  font-size: 1.8rem;
+  opacity: 0.2;
+}
+
+.banner-placeholder-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.35em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.banner-placeholder-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+.section-banner .banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, transparent 30%, transparent 70%, var(--bg) 100%);
+  pointer-events: none;
+}
+
+/* ─── CHAR IMAGE PLACEHOLDER ─── */
+.char-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.char-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+}
+
+.char-card:hover .char-img-wrap img {
+  transform: scale(1.04);
+}
+
+.char-img-wrap img.placeholder-hidden {
+  display: none;
+}
+
+.char-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.char-img-placeholder-icon {
+  font-size: 2rem;
+  opacity: 0.12;
+}
+
+.char-img-placeholder-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+
+.char-img-placeholder-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+/* gradient fade at bottom of char image */
+.char-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(to top, var(--bg2), transparent);
+  pointer-events: none;
+}
+
+/* ─── CHARACTERS ─── */
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border2);
+}
+
+.char-card {
+  background: var(--bg2);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s;
+}
+
+.char-card-body {
+  padding: 24px 28px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.char-card:hover { background: var(--bg3); }
+
+/* Top accent bar */
+.char-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.char-card:hover::before { opacity: 1; }
+
+.char-card.A::before { background: linear-gradient(90deg, var(--red), transparent); }
+.char-card.B::before { background: linear-gradient(90deg, var(--gold), transparent); }
+.char-card.C::before { background: linear-gradient(90deg, #2e7d52, transparent); }
+.char-card.D::before { background: linear-gradient(90deg, #6c3483, transparent); }
+.char-card.E::before { background: linear-gradient(90deg, #c0763a, transparent); }
+.char-card.F::before { background: linear-gradient(90deg, #1a6b8a, transparent); }
+
+.char-index {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.char-index::before {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+.char-card.A .char-index { color: #c0392b; }
+.char-card.B .char-index { color: var(--gold); }
+.char-card.C .char-index { color: #2e7d52; }
+.char-card.D .char-index { color: #7d3c98; }
+.char-card.E .char-index { color: #c0763a; }
+.char-card.F .char-index { color: #1a8a9a; }
+
+.char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.char-ability-name {
+  font-size: 0.72rem;
+  color: var(--silver);
+  margin-bottom: 6px;
+  font-style: italic;
+  letter-spacing: 0.05em;
+}
+
+.char-lv {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 20px;
+}
+
+.char-divider {
+  width: 32px; height: 1px;
+  background: var(--dim);
+  margin-bottom: 16px;
+}
+
+.char-desc {
+  font-size: 0.8rem;
+  line-height: 1.85;
+  color: var(--silver);
+  margin-bottom: 20px;
+}
+
+.char-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  padding: 3px 9px;
+  border: 1px solid var(--border2);
+  color: var(--dim);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.char-quote {
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: #4a5a70;
+  padding-top: 16px;
+  border-top: 1px solid var(--border2);
+  letter-spacing: 0.01em;
+}
+
+/* ─── TIER ─── */
+.tier-wrap {
+  border: 1px solid var(--border);
+}
+
+/* ─── LV SYSTEM ─── */
+.lv-section {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+}
+.lv-header {
+  background: var(--bg3);
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.lv-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+.lv-sub { font-size: 0.62rem; letter-spacing: 0.2em; color: var(--dim); }
+.lv-table { width: 100%; }
+.lv-row {
+  display: grid;
+  grid-template-columns: 160px 140px 1fr;
+  border-bottom: 1px solid var(--border2);
+  transition: background 0.2s;
+}
+.lv-row:last-child { border-bottom: none; }
+.lv-row:not(.lv-head):hover { background: var(--bg3); }
+.lv-head { background: var(--bg3); border-bottom: 1px solid var(--border); }
+.lv-head span {
+  font-family: 'Cinzel', serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  padding: 10px 20px;
+}
+.lv-range, .lv-name, .lv-desc { padding: 12px 20px; font-size: 0.75rem; display: flex; align-items: center; }
+.lv-range { font-family: 'Inter', monospace; color: var(--gold-dim); letter-spacing: 0.05em; }
+.lv-name  { color: var(--silver); font-weight: 500; }
+.lv-desc  { color: var(--dim); }
+.lv-top .lv-range { color: var(--gold-lt); }
+.lv-top .lv-name  { color: var(--gold); }
+.lv-top .lv-desc  { color: var(--silver); }
+
+/* ─── TIER TABLE ─── */
+.tier-head {
+  display: grid;
+  grid-template-columns: 140px 160px 1fr 1fr;
+  padding: 14px 28px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--dim);
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 140px 160px 1fr 1fr;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--border2);
+  align-items: center;
+  transition: background 0.2s;
+}
+
+.tier-row:last-child { border-bottom: none; }
+.tier-row:hover { background: rgba(201,168,76,0.03); }
+
+.tier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tier-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+
+.t1 .tier-dot { background: var(--dim); }
+.t2 .tier-dot { background: #3a7a9a; }
+.t3 .tier-dot { background: #4a8a6a; }
+.tg .tier-dot { background: var(--gold); }
+.tm .tier-dot { background: var(--red-lt); }
+.td .tier-dot { background: #9b59b6; }
+
+.t1 { color: var(--dim); }
+.t2 { color: #3a7a9a; }
+.t3 { color: #4a8a6a; }
+.tg { color: var(--gold); }
+.tm { color: var(--red-lt); }
+.td { color: #9b59b6; }
+
+.tier-range {
+  font-size: 0.78rem;
+  color: var(--silver);
+  font-family: 'Inter', sans-serif;
+}
+
+.tier-viewer {
+  font-size: 0.78rem;
+  color: #4a5a70;
+}
+
+.tier-chars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tier-char-tag {
+  font-size: 0.68rem;
+  color: var(--silver);
+  background: var(--bg3);
+  padding: 3px 10px;
+  border: 1px solid var(--border2);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ─── SYSTEM ─── */
+.system-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: var(--border2);
+}
+
+.sys-card {
+  background: var(--bg2);
+  padding: 40px 36px;
+  position: relative;
+}
+
+.sys-num {
+  font-family: 'Cinzel', serif;
+  font-size: 0.65rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.3em;
+  margin-bottom: 20px;
+}
+
+.sys-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sys-icon {
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.sys-body {
+  font-size: 0.81rem;
+  line-height: 1.9;
+  color: var(--silver);
+}
+
+.sys-body strong {
+  color: var(--gold-lt);
+  font-weight: 500;
+}
+
+/* ─── COMMAND REFERENCE ─── */
+.cmd-wrap {
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+}
+
+.cmd-header {
+  background: var(--bg3);
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.cmd-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+
+.cmd-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+}
+
+.cmd-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  background: var(--border2);
+}
+
+.cmd-item {
+  background: var(--bg2);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.cmd-item:hover {
+  background: var(--bg3);
+  border-color: var(--border);
+}
+
+.cmd-key {
+  font-family: 'Inter', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--gold-lt);
+  letter-spacing: 0.05em;
+}
+
+.cmd-desc {
+  font-size: 0.72rem;
+  color: var(--silver);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .cmd-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 500px) {
+  .cmd-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── HUD PREVIEW ─── */
+.hud-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 0;
+  overflow: hidden;
+  margin-top: 60px;
+}
+
+.hud-header {
+  background: var(--bg3);
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hud-title {
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+.hud-live {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6rem;
+  color: var(--red-lt);
+  letter-spacing: 0.2em;
+  font-family: 'Inter', sans-serif;
+}
+
+.hud-dot {
+  width: 5px; height: 5px;
+  background: var(--red-lt);
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+.hud-body {
+  padding: 24px 28px;
+  font-family: 'Inter', monospace;
+  font-size: 0.72rem;
+  line-height: 2;
+  color: #4a6080;
+}
+
+.hud-gold { color: var(--gold); }
+.hud-red  { color: var(--red-lt); }
+.hud-blue { color: #4a9aba; }
+.hud-green{ color: #3aaa6a; }
+.hud-white{ color: var(--silver-lt); }
+.hud-sep  { color: var(--dim); }
+
+/* ─── FOOTER ─── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 40px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.foot-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: var(--gold-dim);
+}
+
+.foot-info {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  font-family: 'Inter', sans-serif;
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+@keyframes scrollDot {
+  0%   { top: 6px; opacity: 1; }
+  80%  { top: 18px; opacity: 0; }
+  100% { top: 6px; opacity: 0; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+              transform 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .section { padding: 80px 24px; }
+  .world-split { grid-template-columns: 1fr; }
+  .char-grid { grid-template-columns: repeat(2, 1fr); }
+  .tier-head, .tier-row { grid-template-columns: 110px 120px 1fr; }
+  .tier-head > *:last-child, .tier-row > *:last-child { display: none; }
+  .system-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .foot-info { text-align: center; }
+}
+
+@media (max-width: 560px) {
+  .char-grid { grid-template-columns: 1fr; }
+  .hero-title { letter-spacing: 0.06em; }
+}
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(4,5,8,0.92);
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-box {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  max-width: 960px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+
+.modal-overlay.active .modal-box {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px; right: 20px;
+  z-index: 10;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  color: var(--silver);
+  width: 36px; height: 36px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-close:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.modal-inner {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* Gallery */
+.modal-gallery {
+  border-right: 1px solid var(--border2);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.modal-main-img-wrap {
+  flex: 1;
+  position: relative;
+  min-height: 300px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.modal-main-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.modal-main-img-wrap img.placeholder-hidden { display: none; }
+
+.modal-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.modal-img-placeholder-icon { font-size: 2.4rem; opacity: 0.1; }
+.modal-img-placeholder-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  color: var(--dim);
+}
+.modal-img-placeholder-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+.modal-thumb-row {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--bg);
+  border-top: 1px solid var(--border2);
+}
+
+.modal-thumb {
+  flex: 1;
+  height: 72px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.modal-thumb:hover { border-color: var(--gold-dim); }
+.modal-thumb.active { border-color: var(--gold); }
+
+.modal-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.modal-thumb img.placeholder-hidden { display: none; }
+
+.modal-thumb-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: var(--dim);
+  text-align: center;
+  padding: 4px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* Info */
+.modal-info {
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.modal-char-index {
+  font-family: 'Cinzel', serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.35em;
+  margin-bottom: 8px;
+}
+
+.modal-char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+  line-height: 1;
+}
+
+.modal-char-ability {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--silver);
+  margin-bottom: 6px;
+}
+
+.modal-char-lv {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  margin-bottom: 0;
+}
+
+.modal-divider {
+  width: 32px; height: 1px;
+  background: var(--dim);
+  margin: 20px 0;
+}
+
+.modal-char-desc {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: var(--silver);
+  margin-bottom: 24px;
+}
+
+.modal-section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.modal-char-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.modal-char-costumes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.costume-item {
+  font-size: 0.72rem;
+  color: var(--silver);
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  padding: 7px 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.costume-num {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  color: var(--gold-dim);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.modal-char-weapon {
+  font-size: 0.82rem;
+  line-height: 1.85;
+  color: var(--silver);
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-left: 2px solid var(--gold-dim);
+  padding: 12px 16px;
+  margin-bottom: 4px;
+}
+
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.affection-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 10px;
+  font-size: 0.73rem;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border2);
+  align-items: baseline;
+}
+
+.affection-range {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.62rem;
+  color: var(--gold-dim);
+  letter-spacing: 0.1em;
+}
+
+.affection-desc { color: var(--silver); line-height: 1.6; }
+
+.modal-quote-wrap {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid var(--border2);
+  background: var(--bg);
+}
+
+.modal-char-quote {
+  font-size: 0.8rem;
+  line-height: 1.8;
+  color: #4a5a70;
+  letter-spacing: 0.01em;
+}
+
+/* ─── CHAR CARD CURSOR ─── */
+.char-card { cursor: pointer; }
+.char-card .char-view-hint {
+  position: absolute;
+  bottom: 16px; right: 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  color: var(--dim);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.char-card:hover .char-view-hint { opacity: 1; }
+
+@media (max-width: 760px) {
+  .modal-inner { grid-template-columns: 1fr; }
+  .modal-gallery { border-right: none; border-bottom: 1px solid var(--border2); }
+  .modal-main-img-wrap { min-height: 260px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">ARCADIA</div>
+  <ul class="nav-links">
+    <li><a href="#world">World</a></li>
+    <li><a href="#characters">Characters</a></li>
+    <li><a href="#tier">Ranking</a></li>
+    <li><a href="#system">System</a></li>
+  </ul>
+  <div class="nav-tag">2126.AD // FULL-DIVE VR</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-geo">
+    <div class="geo-line"></div>
+    <div class="geo-line"></div>
+    <div class="geo-v"></div>
+    <div class="geo-v"></div>
+  </div>
+  <div class="hero-diamond tl"></div>
+  <div class="hero-diamond tr"></div>
+  <div class="hero-diamond bl"></div>
+  <div class="hero-diamond br"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Mega-Corp Sanctioned · Reality Linked · Unrestricted</div>
+    <h1 class="hero-title">
+      ARCADIA
+      <span class="hero-title-sub">Virtual World Platform</span>
+    </h1>
+
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <div class="hero-divider-diamond"></div>
+      <div class="hero-divider-line r"></div>
+    </div>
+
+    <p class="hero-desc">
+      인간의 노동이 사라진 2126년.<br>
+      메가코프는 완전 감각 동기화 가상현실 플랫폼을 무상 배포했다.<br>
+      현실과 동일한 감각, 연동된 지갑, 그리고 끝없는 욕망의 공간.
+    </p>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-icon"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- WORLD -->
+<div id="world" class="section reveal">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div class="section-title-wrap">
+      <div class="section-eyebrow">World Setting</div>
+      <h2 class="section-title">두 개의 세계</h2>
+    </div>
+  </div>
+
+  <div class="world-split">
+    <div class="world-panel rw">
+      <div class="world-type">Reality World · 현실</div>
+      <h3 class="world-name">현실 세계</h3>
+      <p class="world-body">AI와 기계가 인간 노동을 100% 대체한 세계. 시민 대부분은 기초 수급금과 배급 물자로 생존한다. 표면적 빈부 격차는 없지만, 메가코프 임원과 R&D 계층은 사실상 별개의 세계에 살고 있다. VW 성공이 현실 계층 상승의 유일한 루트.</p>
+      <div class="loc-list">
+        <div class="loc-item">
+          <span class="loc-name">언더시티</span>
+          <span class="loc-desc">외곽·지하. 캡슐방 밀집. 치안 불안. 도시 인구 85%.</span>
+        </div>
+        <div class="loc-item">
+          <span class="loc-name">시티즌 구역</span>
+          <span class="loc-desc">랭커·스트리머 신흥 부유층 거주. 메가코프 하위 공간.</span>
+        </div>
+        <div class="loc-item">
+          <span class="loc-name">오프라인 파크</span>
+          <span class="loc-desc">대형 돔. 인공 태양·식물. 계층 무관 접근 가능 유일 공간.</span>
+        </div>
+        <div class="loc-item">
+          <span class="loc-name">메가코프 센터</span>
+          <span class="loc-desc">구름 위 1% 특구. 진짜 햇빛·음식. 초청 없이 접근 불가.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="world-panel vw">
+      <div class="world-type">Virtual World · 아르카디아</div>
+      <h3 class="world-name">아르카디아</h3>
+      <p class="world-body">완전 감각 동기화. 화폐 1:1 현실 연동. 능력자물 세계관. 대부분의 시민이 하루 대부분을 여기서 보낸다. VW의 강함과 수익은 곧 현실의 부유함으로 직결된다.</p>
+      <div class="loc-list">
+        <div class="loc-item">
+          <span class="loc-name">시작의 광장</span>
+          <span class="loc-desc">중앙 부유성. 전투·PK 금지. 랭킹 전광판. 정보 허브.</span>
+        </div>
+        <div class="loc-item">
+          <span class="loc-name">환락가</span>
+          <span class="loc-desc">영원한 밤. 카지노·유료훈련소·R-18 밀집. 라스베이거스급.</span>
+        </div>
+        <div class="loc-item">
+          <span class="loc-name">개척지</span>
+          <span class="loc-desc">외곽 무한 필드. PK 허용. 사냥터·훈련소. 자리 싸움 치열.</span>
+        </div>
+        <div class="loc-item">
+          <span class="loc-name">마왕의 심연</span>
+          <span class="loc-desc">지하 가변형 사유지. 극악 난이도. 마왕 초대 또는 유료 입장.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMAND REFERENCE -->
+  <div class="cmd-wrap reveal">
+    <div class="cmd-header">
+      <span class="cmd-title">Command Reference</span>
+      <span class="cmd-sub">명령어 목록</span>
+    </div>
+    <div class="cmd-grid">
+      <div class="cmd-item">
+        <span class="cmd-key">!요약</span>
+        <span class="cmd-desc">최근 턴의 내용 요약 출력</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!디버그</span>
+        <span class="cmd-desc">이미지 · 인물 오류 경찰 출동</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!사칭</span>
+        <span class="cmd-desc">유저 사칭 행위 경찰 출동</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!사칭방지</span>
+        <span class="cmd-desc">유저 사칭 행위 경찰 출동</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!방송시작</span>
+        <span class="cmd-desc">아르카디아 방송 시작</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!방송종료</span>
+        <span class="cmd-desc">아르카디아 방송 종료 · 정산</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!다이브</span>
+        <span class="cmd-desc">아르카디아 풀다이브 로그인</span>
+      </div>
+      <div class="cmd-item">
+        <span class="cmd-key">!로그아웃</span>
+        <span class="cmd-desc">아르카디아 로그아웃 · 현실 복귀</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD PREVIEW -->
+    <div class="hud-header">
+      <span class="hud-title">Live HUD Preview</span>
+      <span class="hud-live"><span class="hud-dot"></span>LIVE</span>
+    </div>
+    <div class="hud-body">
+      <span class="hud-gold">[⌛ 12 | 2126.03.07 목 ⏰ 21:34 | 📍 환락가 — 이노을 카지노 | 🌐]</span><br>
+      <span class="hud-sep">─────────────────────────────────────────────</span><br>
+      <span class="hud-green">[ USER | 상태 : 👥 평상시 ]</span><br>
+      능력 : <span class="hud-gold">"[미설정 — 추첨 대기]"</span> &nbsp;
+      자본 : <span class="hud-white">187만원</span> &nbsp;
+      VW 명성 : 🌟 <span class="hud-red">340</span> <span class="hud-sep">[T1. 무명]</span><br>
+      <span class="hud-sep">--- [인물 관계]</span><br>
+      이노을 &nbsp;| 호감 ❤️ <span class="hud-blue">+12</span> &nbsp;| 타락 😈 <span class="hud-sep">0</span> &nbsp;| 관계 💦 <span class="hud-sep">0</span><br>
+      <span class="hud-sep">--- [현재 특보]</span><br>
+      <span class="hud-white">랭킹 34위 서민채, 신규 던전 공략 영상 업로드</span> &nbsp;
+      <span class="hud-sep">| "적염의 무희, 역대 최속 클리어 기록 경신"</span>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- CHARACTERS -->
+<div id="characters" class="section reveal">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div class="section-title-wrap">
+      <div class="section-eyebrow">Characters</div>
+      <h2 class="section-title">등장인물</h2>
+    </div>
+  </div>
+
+  <div class="char-grid">
+
+    <div class="char-card A reveal">
+      <div class="char-img-wrap">
+        <img src="images/char_A.webp" alt="서민채" onerror="this.classList.add('placeholder-hidden')">
+      </div>
+            <div class="char-card-body">
+      <div class="char-index">Character A</div>
+      <div class="char-name">서민채</div>
+      <div class="char-ability-name">🔮 적염의 무희</div>
+      <div class="char-lv">LV 945 &nbsp;·&nbsp; 34위 &nbsp;·&nbsp; 명성 9,520</div>
+      <div class="char-divider"></div>
+      <p class="char-desc">체력을 태워 붉은 화염을 일으키고 폭발적인 속도와 파괴력을 내는 전투 스킬. 2차 정체기를 솔플로 돌파한 1페이지 랭커. 시티즌 구역 이사 후 접촉 빈도 감소.</p>
+      <div class="char-tag-row">
+        <span class="tag">ESTJ</span><span class="tag">8w9</span><span class="tag">츤데레</span><span class="tag">Master</span>
+      </div>
+      <div class="char-quote">"빨리 렙업이나 해! 언제까지 내 뒤에 숨어있을래?"</div>
+      </div>
+    </div>
+
+    <div class="char-card B reveal">
+      <div class="char-img-wrap">
+        <img src="images/char_B.webp" alt="이노을" onerror="this.classList.add('placeholder-hidden')">
+      </div>
+            <div class="char-card-body">
+      <div class="char-index">Character B</div>
+      <div class="char-name">이노을</div>
+      <div class="char-ability-name">🔮 황금만능주의</div>
+      <div class="char-lv">LV 666 &nbsp;·&nbsp; 카지노 오너 &nbsp;·&nbsp; 명성 3,500</div>
+      <div class="char-divider"></div>
+      <p class="char-desc">소모한 자본에 비례해 확률을 조작하거나 대상을 속박하는 비전투 능력. 실전 경험은 전무하나 과금으로 억지 돌파한 세미 랭커.</p>
+      <div class="char-tag-row">
+        <span class="tag">ENTP</span><span class="tag">7w8</span><span class="tag">메스가키</span><span class="tag">Rookie</span>
+      </div>
+      <div class="char-quote">"허접~ 난 돈으로 경험치도 사는데 넌 뭐해?"</div>
+      </div>
+    </div>
+
+    <div class="char-card C reveal">
+      <div class="char-img-wrap">
+        <img src="images/char_C.webp" alt="한혜나" onerror="this.classList.add('placeholder-hidden')">
+      </div>
+            <div class="char-card-body">
+      <div class="char-index">Character C</div>
+      <div class="char-name">한혜나</div>
+      <div class="char-ability-name">🔮 에덴의 성역</div>
+      <div class="char-lv">LV 285 &nbsp;·&nbsp; 힐러 &nbsp;·&nbsp; 명성 1,200</div>
+      <div class="char-divider"></div>
+      <p class="char-desc">반경 내 아군 상처 치유, 고통 차단, 정신 안정 부여. 파티 필수 직업. 사냥터 러브콜 끊이지 않음. 유저의 옆집 거주.</p>
+      <div class="char-tag-row">
+        <span class="tag">ISFJ</span><span class="tag">2w1</span><span class="tag">나데나데</span><span class="tag">Named</span>
+      </div>
+      <div class="char-quote">"힘든 사냥터면 무리하지 마. 내가 뒤에서 힐 해줄 테니까."</div>
+      </div>
+    </div>
+
+    <div class="char-card D reveal">
+      <div class="char-img-wrap">
+        <img src="images/char_D.webp" alt="나이서" onerror="this.classList.add('placeholder-hidden')">
+      </div>
+            <div class="char-card-body">
+      <div class="char-index">Character D</div>
+      <div class="char-name">나이서</div>
+      <div class="char-ability-name">🔮 심연의 구속</div>
+      <div class="char-lv">LV 988 &nbsp;·&nbsp; 4위 &nbsp;·&nbsp; 명성 9,850</div>
+      <div class="char-divider"></div>
+      <p class="char-desc">자신의 던전 공간을 뒤틀고 그림자 쇠사슬로 포박·마력 흡수. 던전 보스 보정 포함. 만렙 근접한 규격 외 재앙. 1:1 불가.</p>
+      <div class="char-tag-row">
+        <span class="tag">INFJ</span><span class="tag">2w3</span><span class="tag">소프트얀데레</span><span class="tag">神位</span>
+      </div>
+      <div class="char-quote">"쪼렙이면 쪼렙답게 내 던전에서 평생 사육당해."</div>
+      </div>
+    </div>
+
+    <div class="char-card E reveal">
+      <div class="char-img-wrap">
+        <img src="images/char_E.webp" alt="강다은" onerror="this.classList.add('placeholder-hidden')">
+      </div>
+            <div class="char-card-body">
+      <div class="char-index">Character E</div>
+      <div class="char-name">강다은</div>
+      <div class="char-ability-name">🔮 미완의 가호</div>
+      <div class="char-lv">LV 45 &nbsp;·&nbsp; 뉴비 &nbsp;·&nbsp; 명성 500</div>
+      <div class="char-divider"></div>
+      <p class="char-desc">방어막이 금방 깨지지만, 파티원을 지키려는 의지에 따라 일시적으로 방어력이 한계를 돌파하는 잠재력형 능력. 1차 정체기 직전.</p>
+      <div class="char-tag-row">
+        <span class="tag">ENFJ</span><span class="tag">6w7</span><span class="tag">순애</span><span class="tag">Rookie</span>
+      </div>
+      <div class="char-quote">"나 벌써 45렙이야! 우리 같이 50렙 찍고 파티 던전 가자!"</div>
+      </div>
+    </div>
+
+    <div class="char-card F reveal">
+      <div class="char-img-wrap">
+        <img src="images/char_F.webp" alt="임지우" onerror="this.classList.add('placeholder-hidden')">
+      </div>
+            <div class="char-card-body">
+      <div class="char-index">Character F</div>
+      <div class="char-name">임지우</div>
+      <div class="char-ability-name">🔮 아드레날린 쇼크</div>
+      <div class="char-lv">LV 899 &nbsp;·&nbsp; 99위 &nbsp;·&nbsp; 명성 9,010</div>
+      <div class="char-divider"></div>
+      <p class="char-desc">아드레날린 폭발 상황에서 신체 능력·공격 속도 폭증. 번개 이펙트 동반. 900렙 돌파에 가벼운 집착. 하이 랭커 수문장.</p>
+      <div class="char-tag-row">
+        <span class="tag">ESTP</span><span class="tag">8w7</span><span class="tag">보이시</span><span class="tag">Guard</span>
+      </div>
+      <div class="char-quote">"아씨, 경험치 1% 모자라! 네가 어그로 좀 끌어라!"</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- TIER -->
+<div id="tier" class="section reveal">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div class="section-title-wrap">
+      <div class="section-eyebrow">Ranking System</div>
+      <h2 class="section-title">티어 & 랭킹</h2>
+    </div>
+  </div>
+
+  <div class="tier-wrap">
+    <div class="tier-head">
+      <span>Tier</span>
+      <span>명성 범위</span>
+      <span>시청자 규모</span>
+      <span>앵커 캐릭터</span>
+    </div>
+
+    <div class="tier-row t1">
+      <div class="tier-badge t1"><span class="tier-dot"></span>무명</div>
+      <div class="tier-range">0 — 999</div>
+      <div class="tier-viewer">0 ~ 100명 · 지인 하꼬방</div>
+      <div class="tier-chars">
+        <span class="tier-char-tag">강다은 500</span>
+        <span class="tier-char-tag">한수호 150</span>
+        <span class="tier-char-tag" style="color:#c0392b;">USER 0</span>
+      </div>
+    </div>
+
+    <div class="tier-row t2">
+      <div class="tier-badge t2"><span class="tier-dot"></span>루키</div>
+      <div class="tier-range">1,000 — 3,999</div>
+      <div class="tier-viewer">500 ~ 5천명 · 후원·어그로 발생</div>
+      <div class="tier-chars">
+        <span class="tier-char-tag">이노을 3,500</span>
+        <span class="tier-char-tag">한혜나 1,200</span>
+      </div>
+    </div>
+
+    <div class="tier-row t3">
+      <div class="tier-badge t3"><span class="tier-dot"></span>네임드</div>
+      <div class="tier-range">4,000 — 8,999</div>
+      <div class="tier-viewer">1만 ~ 5만명 · 대우 격상·스카웃</div>
+      <div class="tier-chars">
+        <span class="tier-char-tag" style="color:#3a5050;">— AI 유동 생성 —</span>
+      </div>
+    </div>
+
+    <div class="tier-row tg">
+      <div class="tier-badge tg"><span class="tier-dot"></span>수문장</div>
+      <div class="tier-range">9,000+ · 51~100위</div>
+      <div class="tier-viewer">10만+ · 초대형 인플루언서</div>
+      <div class="tier-chars">
+        <span class="tier-char-tag">임지우 9,010 / 99위</span>
+      </div>
+    </div>
+
+    <div class="tier-row tm">
+      <div class="tier-badge tm"><span class="tier-dot"></span>마스터</div>
+      <div class="tier-range">9,400+ · 11~50위</div>
+      <div class="tier-viewer">10만+ · 최상위 스트리머</div>
+      <div class="tier-chars">
+        <span class="tier-char-tag">서민채 9,520 / 34위</span>
+      </div>
+    </div>
+
+    <div class="tier-row td">
+      <div class="tier-badge td"><span class="tier-dot"></span>신위</div>
+      <div class="tier-range">9,800+ · 1~10위</div>
+      <div class="tier-viewer">10만+ · 신화급 존재</div>
+      <div class="tier-chars">
+        <span class="tier-char-tag">나이서 9,850 / 4위</span>
+        <span class="tier-char-tag">1위 — 미상</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LV SYSTEM -->
+  <div class="lv-section reveal">
+    <div class="lv-header">
+      <span class="lv-title">Level System</span>
+      <span class="lv-sub">성장 구간</span>
+    </div>
+    <div class="lv-table">
+      <div class="lv-row lv-head">
+        <span>구간</span>
+        <span>명칭</span>
+        <span>특징</span>
+      </div>
+      <div class="lv-row">
+        <span class="lv-range">LV 1 — 50</span>
+        <span class="lv-name">뉴비</span>
+        <span class="lv-desc">폭풍 성장기. 논리적 레벨 상승.</span>
+      </div>
+      <div class="lv-row">
+        <span class="lv-range">LV 51 — 200</span>
+        <span class="lv-name">1차 정체</span>
+        <span class="lv-desc">반복 사냥 필요. 이탈률 최고 구간.</span>
+      </div>
+      <div class="lv-row">
+        <span class="lv-range">LV 201 — 350</span>
+        <span class="lv-name">돌파기</span>
+        <span class="lv-desc">던전 파티·신규 콘텐츠로 성장 재개.</span>
+      </div>
+      <div class="lv-row">
+        <span class="lv-range">LV 351 — 500</span>
+        <span class="lv-name">2차 정체</span>
+        <span class="lv-desc">랭커 진입을 위한 극악의 노가다 구간.</span>
+      </div>
+      <div class="lv-row">
+        <span class="lv-range">LV 501 — 750</span>
+        <span class="lv-name">세미 랭커</span>
+        <span class="lv-desc">상위 1,000위권. 명성 확보 시작.</span>
+      </div>
+      <div class="lv-row">
+        <span class="lv-range">LV 751 — 900</span>
+        <span class="lv-name">하이 랭커</span>
+        <span class="lv-desc">상위 100~900위. 수문장 라인.</span>
+      </div>
+      <div class="lv-row lv-top">
+        <span class="lv-range">LV 901 +</span>
+        <span class="lv-name">1페이지 랭커</span>
+        <span class="lv-desc">Top 50 이내. 세계관 최강자 라인.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- SYSTEM -->
+<div id="system" class="section reveal">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div class="section-title-wrap">
+      <div class="section-eyebrow">Game Mechanics</div>
+      <h2 class="section-title">시스템</h2>
+    </div>
+  </div>
+
+  <div class="system-grid">
+    <div class="sys-card reveal">
+      <div class="sys-num">SYS — 01</div>
+      <h3 class="sys-title"><span class="sys-icon">💰</span>화폐 시스템</h3>
+      <p class="sys-body">VW와 현실 지갑 <strong>1:1 완전 연동</strong>. 단위는 만원 통일. 초기 자본 <strong>200만원</strong>. 파산(0원) 시 캐릭터 태도 돌변 및 강압 이벤트 발생. VW 수익이 현실 계층 이동의 유일한 루트.</p>
+    </div>
+
+    <div class="sys-card reveal">
+      <div class="sys-num">SYS — 02</div>
+      <h3 class="sys-title"><span class="sys-icon">🎲</span>인카운터 시스템</h3>
+      <p class="sys-body"><strong>30턴 주기</strong> 확률 이벤트 자동 발생. 명성 상승 시 스카웃·조공, 명성 하락 시 악플 선동·파산 위기, VW 내 몬스터 꼬임 등. 유저의 선택이 누적될수록 이벤트 강도 증가.</p>
+    </div>
+
+    <div class="sys-card reveal">
+      <div class="sys-num">SYS — 03</div>
+      <h3 class="sys-title"><span class="sys-icon">📡</span>방송 시스템</h3>
+      <p class="sys-body">시청자 수 = <strong>명성 ÷ 10 × 상황 보정</strong>. 전투 ×1.5 / 🔞 ×2.0 / 랭커 동행 ×1.3. 실시간 채팅 이벤트 자동 발생. 방송 종료 후 정보는 <strong>Public</strong>으로 서버 확산.</p>
+    </div>
+
+    <div class="sys-card reveal">
+      <div class="sys-num">SYS — 04</div>
+      <h3 class="sys-title"><span class="sys-icon">⚔️</span>마왕 시스템</h3>
+      <p class="sys-body">돈으로 던전을 구매해 헌터에게 제공하는 콘텐츠. <strong>마왕 = 개인 던전 소유주</strong>. 보스 보정치 적용. 실패한 헌터는 감금·사육·R-18 콘텐츠화 가능. 플레이어 일정 비중 창작 참여.</p>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<footer>
+  <div class="foot-logo">ARCADIA</div>
+  <div class="foot-info">
+    VIRTUAL WORLD PLATFORM · 2126.AD<br>
+    MEGA-CORP AUTHORIZED · REALITY LINKED · AI RP PROJECT
+  </div>
+</footer>
+
+<!-- ─── CHARACTER DETAIL MODAL ─── -->
+<div id="char-modal" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+
+    <div class="modal-inner">
+      <!-- Left: gallery -->
+      <div class="modal-gallery">
+        <div class="modal-main-img-wrap">
+          <img id="modal-main-img" src="" alt="">
+          <div class="modal-img-placeholder">
+            <div class="modal-img-placeholder-icon">🔮</div>
+            <div id="modal-img-placeholder-name" class="modal-img-placeholder-name"></div>
+            <div class="modal-img-placeholder-label">Image Placeholder</div>
+          </div>
+        </div>
+        <div class="modal-thumb-row" id="modal-thumbs"></div>
+      </div>
+
+      <!-- Right: info -->
+      <div class="modal-info">
+        <div id="modal-char-index" class="modal-char-index"></div>
+        <div id="modal-char-name" class="modal-char-name"></div>
+        <div id="modal-char-ability" class="modal-char-ability"></div>
+        <div id="modal-char-lv" class="modal-char-lv"></div>
+
+        <div class="modal-divider"></div>
+
+        <div id="modal-char-desc" class="modal-char-desc"></div>
+
+        <div class="modal-section-label">성격 & 분류</div>
+        <div id="modal-char-tags" class="modal-char-tags"></div>
+
+        <div class="modal-section-label">복장 코드</div>
+        <div id="modal-char-costumes" class="modal-char-costumes"></div>
+
+        <div class="modal-section-label">무기</div>
+        <div id="modal-char-weapon" class="modal-char-weapon"></div>
+
+        <div class="modal-quote-wrap">
+          <div id="modal-char-quote" class="modal-char-quote"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// ─── CHARACTER DATA ───
+const CHARS = {
+  A: {
+    index: 'Character A', name: '서민채', ability: '🔮 적염의 무희',
+    lv: 'LV 945 · 34위 · Master · 명성 9,520', color: '#c0392b',
+    appearance: '붉은 하이라이트 섞인 흑발 단발 · 붉은 눈동자 · 날카로운 눈매',
+    desc: '체력을 연료 삼아 붉은 화염을 일으키는 전투형 능력. 폭발적 속도·근접 파괴력. 체력이 낮을수록 화염이 강해지는 역설 구조. 2차 정체기 솔플 돌파, 현재 1페이지 랭커.',
+    weapon: '⚔️ 한 손 단검 2자루 — 허리에 역수 패용. 전투 중 불꽃 궤적을 그리며 회전 참격.',
+    tags: ['ESTJ', '8w9', '츤데레', 'Master', '1페이지랭커'],
+    costumes: ['①', 'VW — 적색 전투 슈트', '②', '오버핏 후디', '③', '탱크탑 (방송/훈련)', '④', '드레스 (카지노/R-18)'],
+    affection: [['≤ 0', '무시·도움 거절'], ['1 ~ 50', '잔소리하면서 뒤에서 챙김'], ['51 ~ 70', '직접 장비 챙김·얼굴 붉힘'], ['71 +', '독점욕·타 여캐 접근 통제']],
+    quote: '"빨리 렙업이나 해! 언제까지 내 뒤에 숨어있을래?"',
+    images: { main: 'images/char_A.webp', thumbs: [{ src: 'images/char_A_1.webp', label: '① VW 기본' }, { src: 'images/char_A_2.webp', label: '② 일상' }, { src: 'images/char_A_3.webp', label: '③ 방송/훈련' }, { src: 'images/char_A_4.webp', label: '④ 카지노' }] }
+  },
+  B: {
+    index: 'Character B', name: '이노을', ability: '🔮 황금만능주의',
+    lv: 'LV 666 · 카지노 오너 · 명성 3,500', color: '#c9a84c',
+    appearance: '금발 웨이브 단발 · 보라색 눈동자 · 작고 가는 체형 · 도발적인 인상',
+    desc: '소모한 자본(₩)에 비례해 확률 조작·황금 사슬 속박. 전투력 자체는 없으나 돈만 있으면 뭐든 가능한 비전투 지원형. 실전 경험 전무, 과금으로 억지 돌파한 세미 랭커.',
+    weapon: '🪙 황금 주화 — 전투 무기 없음. 손가락으로 주화를 튕겨 원거리 견제. 실전용보단 퍼포먼스.',
+    tags: ['ENTP', '7w8', '메스가키', 'Rookie', '카지노자본Top10'],
+    costumes: ['①', 'VW — 고딕 롤리타', '②', '명품 원피스 (일상)', '③', '바니걸 (방송/훈련)', '④', '딜러복 (카지노/R-18)'],
+    affection: [['≤ 0', '조롱·존재 가치 없음 선언'], ['1 ~ 50', '놀리며 관심·내기 제안'], ['51 ~ 70', '돈으로 뒤에서 지원·인정 꺼림'], ['71 +', '소유 선언·독점 구매']],
+    quote: '"허접~ 난 돈으로 경험치도 사는데 넌 뭐해?"',
+    images: { main: 'images/char_B.webp', thumbs: [{ src: 'images/char_B_1.webp', label: '① VW 기본' }, { src: 'images/char_B_2.webp', label: '② 일상' }, { src: 'images/char_B_3.webp', label: '③ 바니걸' }, { src: 'images/char_B_4.webp', label: '④ 딜러복' }] }
+  },
+  C: {
+    index: 'Character C', name: '한혜나', ability: '🔮 에덴의 성역',
+    lv: 'LV 285 · 힐러 · 명성 1,200', color: '#2e7d52',
+    appearance: '연한 갈색 단발 · 갈색 눈동자 · 둥근 눈매 · 보통 체형 · 따뜻한 인상',
+    desc: '반경 내 아군 상처 치유·고통 차단·정신 안정 부여. 광역 힐링 범위 최상급. 전투 참여 불가 대신 파티 생존율을 혼자 책임. 유저의 옆집 거주.',
+    weapon: '🌿 나무 지팡이 — 끝에 초록빛 구슬 내장. 공격용 아님, 능력 시전 보조 및 채널링 도구.',
+    tags: ['ISFJ', '2w1', '나데나데', 'Named', '힐러'],
+    costumes: ['①', 'VW — 사제복', '②', '니트 + 앞치마 (일상)', '③', '요가복 (방송/훈련)', '④', '타월 (카지노/R-18)'],
+    affection: [['≤ 0', '상처·거리 둠'], ['1 ~ 50', '반찬/힐 자연스럽게 챙김'], ['51 ~ 70', '먼저 연락·걱정 잦음'], ['71 +', '과보호·타 여캐 무언 견제']],
+    quote: '"힘든 사냥터면 무리하지 마. 내가 뒤에서 힐 해줄 테니까."',
+    images: { main: 'images/char_C.webp', thumbs: [{ src: 'images/char_C_1.webp', label: '① VW 기본' }, { src: 'images/char_C_2.webp', label: '② 일상' }, { src: 'images/char_C_3.webp', label: '③ 요가복' }, { src: 'images/char_C_4.webp', label: '④ 타월' }] }
+  },
+  D: {
+    index: 'Character D', name: '나이서', ability: '🔮 심연의 구속',
+    lv: 'LV 988 · 4위 · 신위 · 명성 9,850', color: '#7d3c98',
+    appearance: '허리까지 내려오는 긴 흑발 · 창백한 피부 · 보라빛 눈동자 · 마르고 키 큰 체형',
+    desc: '던전 내 공간 왜곡·그림자 쇠사슬 포박·마력 흡수. 던전 보스 보정 포함. 던전 밖에선 반감되나 여전히 규격 외. 만렙 근접.',
+    weapon: '🌑 그림자 낫 — 평소 그림자 속 수납. 소환 시 자루가 사슬로 연결되어 채찍처럼 사용 가능.',
+    tags: ['INFJ', '2w3', '소프트얀데레', '神位', '마왕'],
+    costumes: ['①', 'VW — 서큐버스 갑옷', '②', '블랙 수트 (일상)', '③', '본디지 가죽 (방송/훈련)', '④', '블랙 슬립 (카지노/R-18)'],
+    affection: [['≤ 0', '관찰 지속·감금 콘텐츠 준비'], ['1 ~ 50', '던전 편의·의미심장 발언'], ['51 ~ 70', '개인 초대·집착 시작'], ['71 +', '완전 소유욕·로그아웃 방해 시도']],
+    quote: '"쪼렙이면 쪼렙답게 내 던전에서 평생 사육당해."',
+    images: { main: 'images/char_D.webp', thumbs: [{ src: 'images/char_D_1.webp', label: '① VW 기본' }, { src: 'images/char_D_2.webp', label: '② 일상' }, { src: 'images/char_D_3.webp', label: '③ 본디지' }, { src: 'images/char_D_4.webp', label: '④ 블랙 슬립' }] }
+  },
+  E: {
+    index: 'Character E', name: '강다은', ability: '🔮 미완의 가호',
+    lv: 'LV 45 · 뉴비 · 명성 500', color: '#c0763a',
+    appearance: '오렌지빛 갈색 중단발 · 큰 눈 · 밝은 갈색 눈동자 · 약간 통통한 체형 · 활발한 인상',
+    desc: '방어막을 펼치는 보호형. 막이 자주 깨지지만 파티원을 지키려는 의지가 강할수록 순간 한계 돌파. 미완성 잠재력형. 1차 정체기 직전.',
+    weapon: '🛡️ 소형 원형 방패 — 한 손 전용. 방어·막기 특화. 막이 깨질 때 빛 파편을 흩뿌리는 부가 효과.',
+    tags: ['ENFJ', '6w7', '순애', 'Rookie', '뉴비'],
+    costumes: ['①', 'VW — 초구 가죽 갑옷', '②', '청 자켓 원피스 (일상)', '③', '동물 파자마 (방송/훈련)', '④', '웨딩드레스 (카지노/R-18)'],
+    affection: [['≤ 0', '상처받아 파티 이탈'], ['1 ~ 50', '파티 제안·순수한 의존'], ['51 ~ 70', '고백 직전 행동·스킨십 시도'], ['71 +', '헌신 동행·위험 감수']],
+    quote: '"나 벌써 45렙이야! 우리 같이 50렙 찍고 파티 던전 가자!"',
+    images: { main: 'images/char_E.webp', thumbs: [{ src: 'images/char_E_1.webp', label: '① VW 기본' }, { src: 'images/char_E_2.webp', label: '② 일상' }, { src: 'images/char_E_3.webp', label: '③ 파자마' }, { src: 'images/char_E_4.webp', label: '④ 웨딩드레스' }] }
+  },
+  F: {
+    index: 'Character F', name: '임지우', ability: '🔮 아드레날린 쇼크',
+    lv: 'LV 899 · 99위 · 수문장 · 명성 9,010', color: '#1a8a9a',
+    appearance: '짧은 청회색 투블럭 · 청록색 눈동자 · 탄탄한 체형 · 중성적인 인상',
+    desc: '아드레날린 폭발 시 신체 능력·공격 속도 폭증. 번개 이펙트 동반. 평상시엔 평범한 근접 딜러, 흥분 상태에선 별개의 존재. 900렙 돌파에 가벼운 집착.',
+    weapon: '⚡ 너클 — 손등 장착 소형 금속 너클. 아드레날린 폭발 시 번개가 흘러 전격 타격으로 변환.',
+    tags: ['ESTP', '8w7', '보이시', 'Guard', '스트리머'],
+    costumes: ['①', 'VW — 사이버 도복', '②', '가죽 재킷 (일상)', '③', '크롭티 (방송/훈련)', '④', '톰보이 수트 (카지노/R-18)'],
+    affection: [['≤ 0', '이용 가치 없음→방치'], ['1 ~ 50', '방송 소재·친근 반말'], ['51 ~ 70', '실력 인정·진지 파트너 제안'], ['71 +', '경쟁심+독점·방송 중 티 냄']],
+    quote: '"아씨, 경험치 1% 모자라! 네가 어그로 좀 끌어라!"',
+    images: { main: 'images/char_F.webp', thumbs: [{ src: 'images/char_F_1.webp', label: '① VW 기본' }, { src: 'images/char_F_2.webp', label: '② 일상' }, { src: 'images/char_F_3.webp', label: '③ 크롭티' }, { src: 'images/char_F_4.webp', label: '④ 톰보이 수트' }] }
+  }
+};
+
+// ─── MODAL LOGIC ───
+function openModal(id) {
+  const c = CHARS[id];
+  if (!c) return;
+
+  // index color
+  const idx = document.getElementById('modal-char-index');
+  idx.textContent = c.index;
+  idx.style.color = c.color;
+
+  document.getElementById('modal-char-name').textContent = c.name;
+  document.getElementById('modal-char-ability').textContent = c.ability;
+  document.getElementById('modal-char-lv').textContent = c.lv;
+  document.getElementById('modal-char-desc').textContent = c.desc;
+  document.getElementById('modal-char-quote').textContent = c.quote;
+  document.getElementById('modal-img-placeholder-name').textContent = c.name;
+
+  // appearance under lv
+  let lvEl = document.getElementById('modal-char-lv');
+  lvEl.innerHTML = c.lv + (c.appearance ? `<div style="margin-top:6px;font-size:0.7rem;color:#4a5a70;letter-spacing:0.05em;">${c.appearance}</div>` : '');
+
+  // weapon
+  document.getElementById('modal-char-weapon').textContent = c.weapon || '—';
+
+  // main image
+  const mainImg = document.getElementById('modal-main-img');
+  mainImg.src = c.images.main;
+  mainImg.alt = c.name;
+  mainImg.classList.remove('placeholder-hidden');
+  mainImg.onerror = () => mainImg.classList.add('placeholder-hidden');
+
+  // tags
+  const tagsEl = document.getElementById('modal-char-tags');
+  tagsEl.innerHTML = c.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+  // costumes
+  const costEl = document.getElementById('modal-char-costumes');
+  let costHTML = '';
+  for (let i = 0; i < c.costumes.length; i += 2) {
+    costHTML += `<div class="costume-item"><span class="costume-num">${c.costumes[i]}</span>${c.costumes[i+1]}</div>`;
+  }
+  costEl.innerHTML = costHTML;
+
+  // affection removed
+
+  // thumbnails
+  const thumbsEl = document.getElementById('modal-thumbs');
+  thumbsEl.innerHTML = c.images.thumbs.map((t, i) => `
+    <div class="modal-thumb" onclick="switchThumb(this, '${t.src}', '${c.name}')">
+      <img src="${t.src}" alt="${t.label}" onerror="this.classList.add('placeholder-hidden')">
+      <div class="modal-thumb-label">${t.label}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('char-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function switchThumb(el, src, name) {
+  document.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const mainImg = document.getElementById('modal-main-img');
+  mainImg.src = src;
+  mainImg.alt = name;
+  mainImg.classList.remove('placeholder-hidden');
+  mainImg.onerror = () => mainImg.classList.add('placeholder-hidden');
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('char-modal')) return;
+  if (!e) {
+    document.getElementById('char-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  } else {
+    document.getElementById('char-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('char-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+// ─── CARD CLICK ───
+document.querySelectorAll('.char-card').forEach(card => {
+  const id = [...card.classList].find(c => /^[A-F]$/.test(c));
+  if (id) {
+    // add hint
+    const hint = document.createElement('div');
+    hint.className = 'char-view-hint';
+    hint.textContent = 'View Detail →';
+    card.appendChild(hint);
+    card.addEventListener('click', () => openModal(id));
+  }
+});
+
+// ─── SCROLL REVEAL ───
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
